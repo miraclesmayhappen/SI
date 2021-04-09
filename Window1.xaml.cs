@@ -222,6 +222,7 @@ namespace bicycle
 			cyclist.SetName(newname);
 			CyclistNameBlock.Text = cyclist.GetName();
 			CyclistNameChange.Text = "";
+			UpdateFields();
 			
 		}
 
@@ -315,6 +316,8 @@ namespace bicycle
 			TirePressureBlock.Text = cyclist.GetTirePressure().ToString();
 
 			ShifterModeBlock.Text = cyclist.GetShifterMode().ToString();
+
+			WelcomeNameBlock.Text = cyclist.GetName();
 
 		}
 
