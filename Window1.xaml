@@ -1,0 +1,178 @@
+﻿<Window x:Class="bicycle.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:bicycle"
+        mc:Ignorable="d"
+        Title="BicycleApp" Height="515" Width="600" Background="LightSteelBlue" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="bicycle-1024x602.png" Topmost="True">
+    <Window.Effect>
+        <DropShadowEffect/>
+    </Window.Effect>
+    <StackPanel Background="White">
+        <Grid Height="30">
+            <StackPanel HorizontalAlignment="Left" Margin="20 0">
+                <ComboBox FontSize="13" Width="40" Foreground="#FFA2A2A2" SelectedIndex="0" VerticalAlignment="Center">
+                    <ComboBoxItem Content="EN"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20 0">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Click="PowerOffClick" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                    <materialDesign:PackIcon Kind="Power" Foreground="#FFA2A2A2" Width="25" Height="25"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Height="45">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10 0">
+                <Button Uid="0" Width="150" Content="HOME" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="SteelBlue" Click="Button_Click"/>
+                <Button Uid="1" Width="150" Content="SETTINGS" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="SteelBlue" Click="Button_Click"/>
+            </StackPanel>
+            <Grid x:Name="GridCursor" Width="150" Height="5" Background="SteelBlue" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10 0"/>
+        </Grid>
+        <Grid x:Name="GridMain" Height="440" Background="LightSteelBlue">
+            <Border MinWidth="400" MaxWidth="550" Margin="20" Padding="15" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White" CornerRadius="20" x:Name="HomeBorder" Visibility="Visible">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="50" ShadowDepth="0" Color="DarkGray" ></DropShadowEffect>
+                </Border.Effect>
+                <StackPanel x:Name="HomeStackPanel">
+                    <TextBlock Text="Welcome to BicycleApp" x:Name="WelcomeBlock" HorizontalAlignment="Center"  FontSize="20" Margin="5"/>
+
+                    <Grid Width="250" HorizontalAlignment="Center">
+                        <TextBlock Text="Rider:" HorizontalAlignment="Left"/>
+                        <TextBlock Name="RiderState" Text="Off bike" HorizontalAlignment="Right" />
+                    </Grid>
+
+                    <Grid Width="250" HorizontalAlignment="Center">
+                        <TextBlock Text="Bicycle:" HorizontalAlignment="Left"/>
+                        <TextBlock Name="BicycleUpDown" Text="" HorizontalAlignment="Right" />
+                    </Grid>
+
+                    <Grid Width="250" HorizontalAlignment="Center">
+                        <TextBlock Text="Bicycle state:" HorizontalAlignment="Left"/>
+                        <TextBlock Name="BicycleState" Text="Not moving" HorizontalAlignment="Right" />
+                    </Grid>
+                    <Grid Width="250" HorizontalAlignment="Center">
+                        <TextBlock Text="Speed:" HorizontalAlignment="Left"/>
+                        <TextBlock Name="SpeedBlock" Text="0" HorizontalAlignment="Right" >
+                            <TextBlock.DataContext>
+                                <local:MovementSystem/>
+                            </TextBlock.DataContext>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Width="250" HorizontalAlignment="Center">
+                        <TextBlock Text="Shifter Mode:" HorizontalAlignment="Left"/>
+                        <TextBlock Name="ShifterModeBlock" Text="3" HorizontalAlignment="Right" />
+                    </Grid>
+                    <Grid Width="250" HorizontalAlignment="Center">
+                        <TextBlock Text="Direction:" HorizontalAlignment="Left"/>
+                        <TextBlock Name="DirectionBlock" Text="Straight" HorizontalAlignment="Right" />
+                    </Grid>
+                    <TextBlock Name="AlertBlock" Text="" Visibility="Hidden" HorizontalAlignment="Center" Foreground="#FFF0C0AC"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Margin="10 5" HorizontalAlignment="Left">
+                        <Button  Name="TakeBikeButton" Click="TakeBikeButton_Click" Content="Take bike" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                        <Button  Name="PutBikeButton" Click="PutBikeButton_Click" Content="Put bike" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                     </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="10 5" HorizontalAlignment="Right">
+                            <Button  x:Name="SitOnButton" Click="SitOnButton_Click"  Content="Sit on bike" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                            <Button  x:Name="StadOffButton" Click="StadOffButton_Click" Content="Stand off bike" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10 5" HorizontalAlignment="Center">
+                        <Button  Name="TurnRightButton" Click="TurnRightButton_Click" Content="Turn right" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                        <Button Name ="GoStaighButton" Click="GoStaightButton_Click"  Content="Go straight" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                        <Button Name="TurnLeftButton" Click="TurnLeftButton_Click" Content="Turn left" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                        </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Margin="10 5" HorizontalAlignment="Left">
+                        <Button Name="PedalButton" Click="PedalButton_Click" Content="Pedal" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                        <Button Name="PushBikeButton" Click="PushBikeButton_Click" Content="Push bike" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                        <!--<Button Name="TurnLeverButton" Click="PedalButton_Click" Content="Turn lever" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>-->
+                         </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="10 5" HorizontalAlignment="Center">
+                            <Button Name="GentleBrakeButton" Click="GentleBrakeButton_Click" Content="Press brake gently" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                            <Button Name="HardBrakeButton" Click="HardBrakeButton_Click" Content="Press brake hard" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="TurnLeverButtonUp" Click="TurnLeverButtonUp_Click" Content="Turn shifter Up" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Center" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                        <Button Name="TurnLeverButtonDown" Click="TurnLeverButtonDown_Click" Content="Turn shifter Down" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Center" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                    </StackPanel>
+                </StackPanel>
+               </Border>
+
+            <Border MinWidth="400" MaxWidth="550" Margin="20" Padding="15" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White" CornerRadius="20" x:Name="SettingBorder" Visibility="Hidden">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="50" ShadowDepth="0" Color="DarkGray" ></DropShadowEffect>
+                </Border.Effect>
+                <StackPanel x:Name="SettingStackPanel" Visibility="Visible">
+                    <StackPanel><Grid HorizontalAlignment="Center" Width="250">
+                        <TextBlock Text="Cyclist name:" HorizontalAlignment="Left"/>
+                        <TextBlock Name="CyclistNameBlock" Text="Unknown" HorizontalAlignment="Right" />
+                    </Grid>
+                    <Grid Width="250">
+                    <TextBox Name="CyclistNameChange" materialDesign:HintAssist.Hint="New name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="120" CaretBrush="SteelBlue"/>
+                        <Button Name="CyclistNameChangeButton" Click="CyclistNameChangeButton_Click" Content="Change name" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Foreground="SteelBlue"/>
+                    </Grid>
+                    </StackPanel>
+                    
+                    <Separator Width="250" Background="SteelBlue" Opacity="0.5" Margin="5"/>
+                    
+                    <StackPanel>
+                <Grid HorizontalAlignment="Center" Width="250"  Margin="0 10">
+                        <TextBlock Text="Saddle height:" HorizontalAlignment="Left"/>
+                        <TextBlock Name="SaddleHeightBlock" Text="0" HorizontalAlignment="Right" />
+                    </Grid>
+                    <Grid HorizontalAlignment="Center" Width="60"  Margin="0">
+                        <Button Name="SaddleDownButton" Click="SaddleDownButton_Click" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" VerticalAlignment="Center"  HorizontalAlignment="Left" FontSize="12" Padding="0" Height="Auto" Foreground="SteelBlue" Background="{x:Null}" BorderBrush="{x:Null}" Width="25">
+                            <materialDesign:PackIcon Kind="ArrowDown"  Foreground="#FFA2A2A2" Width="25" Height="25"/>
+                        </Button>
+                            <Button Name="SaddleUpButton" Click="SaddleUpButton_Click" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Foreground="SteelBlue" Background="{x:Null}" BorderBrush="{x:Null}" Width="25">
+                                <materialDesign:PackIcon Kind="ArrowUp"  Foreground="#FFA2A2A2" Width="25" Height="25"/>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+
+                    <Separator Width="250" Background="SteelBlue" Opacity="0.5" Margin="5"/>
+
+                    <StackPanel>
+                        <Grid HorizontalAlignment="Center" Width="250"  Margin="0 10">
+                            <TextBlock Text="Steering wheel angle:" HorizontalAlignment="Left"/>
+                            <TextBlock Name="SteeringWheelAngleBlock" Text="0" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Center" Width="60"  Margin="0">
+                            <Button x:Name="SteeringWheelLeftButton" Click="SteeringWheelLeftButton_Click" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" VerticalAlignment="Center"  HorizontalAlignment="Left" FontSize="12" Padding="0" Height="Auto" Foreground="SteelBlue" Background="{x:Null}" BorderBrush="{x:Null}" Width="25">
+                                <materialDesign:PackIcon Kind="ArrowLeft"  Foreground="#FFA2A2A2" Width="25" Height="25"/>
+                            </Button>
+                            <Button Name="SteeringWheelRightButton" Click="SteeringWheelRightButton_Click" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Foreground="SteelBlue" Background="{x:Null}" BorderBrush="{x:Null}" Width="25">
+                                <materialDesign:PackIcon Kind="ArrowRight"  Foreground="#FFA2A2A2" Width="25" Height="25"/>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+
+                    <Separator Width="250" Background="SteelBlue" Opacity="0.5" Margin="5"/>
+
+                    <StackPanel>
+                        <Grid HorizontalAlignment="Center" Width="250"  Margin="0 10">
+                            <TextBlock Text="Tire pressure:" HorizontalAlignment="Left"/>
+                            <TextBlock Name="TirePressureBlock" Text="0" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Center" Width="60"  Margin="0">
+                            <Button Name="TirePressureDownButton" Click="TirePressureDownButton_Click"  Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" VerticalAlignment="Center"  HorizontalAlignment="Left" FontSize="12" Padding="0" Height="Auto" Foreground="SteelBlue" Background="{x:Null}" BorderBrush="{x:Null}" Width="25">
+                                <materialDesign:PackIcon Kind="ArrowDown"  Foreground="#FFA2A2A2" Width="25" Height="25"/>
+                            </Button>
+                            <Button Name="TirePressureUpButton" Click="TirePressureUpButton_Click" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Foreground="SteelBlue" Background="{x:Null}" BorderBrush="{x:Null}" Width="25">
+                                <materialDesign:PackIcon Kind="ArrowUp"  Foreground="#FFA2A2A2" Width="25" Height="25"/>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+
+
+                </StackPanel>
+            </Border>
+
+
+        </Grid>
+    </StackPanel>
+</Window>
