@@ -91,9 +91,9 @@ namespace bicycle
 				case 6:
 					maxspeed = 55;
 					break;
-
-
-
+				case 100:
+					maxspeed = 10;
+					break;
 			}
 		}
 		

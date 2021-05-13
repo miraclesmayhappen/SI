@@ -99,6 +99,7 @@
                         <TextBlock Name="DirectionBlock" Text="Straight" HorizontalAlignment="Right" />
                     </Grid>
                     <TextBlock Name="AlertBlock" Text="" Visibility="Hidden" HorizontalAlignment="Center" Foreground="#FFF0C0AC"/>
+                    <TextBlock Name="SWAlertBlock" Text="Please check your steering wheel angle" Visibility="Collapsed" HorizontalAlignment="Center" Foreground="#FFF0C0AC"/>
                     
                     
                     <!--BUTTONS-->
@@ -233,6 +234,8 @@
                                 <materialDesign:PackIcon Kind="ArrowUp"  Foreground="#FFA2A2A2" Width="25" Height="25"/>
                             </Button>
                         </Grid>
+                        <TextBlock Name="SettingAlertBlock" Text="You cannot change settings while moving on bike" Visibility="Hidden" HorizontalAlignment="Center" Foreground="#FFF0C0AC"/>
+
                     </StackPanel>
 
                 </StackPanel>

@@ -228,38 +228,85 @@ namespace bicycle
 
 		private void SaddleDownButton_Click(object sender, RoutedEventArgs e)
 		{
-			cyclist.SaddleDown();
-			UpdateFields();
+			if (cyclist.GetBikeSpeed() == 0)
+			{
+				cyclist.SaddleDown();
+				UpdateFields();
+			}
+			else
+			{
+				SettingAlertBlock.Visibility = Visibility.Visible;
+			}
 		}
 
 		private void SaddleUpButton_Click(object sender, RoutedEventArgs e)
 		{
-			cyclist.SaddleUp();
-			UpdateFields();
-		}
+			if (cyclist.GetBikeSpeed() == 0)
+			{
+				cyclist.SaddleUp();
+				UpdateFields();
+			}
+			else
+			{
+				SettingAlertBlock.Visibility = Visibility.Visible;
+			}
+			}
 
 		private void SteeringWheelLeftButton_Click(object sender, RoutedEventArgs e)
 		{
-			cyclist.SWAngleLeft();
-			UpdateFields();
+
+
+			if (cyclist.GetBikeSpeed() == 0)
+			{
+				cyclist.SWAngleLeft();
+				UpdateFields();
+			}
+			else
+			{
+				SettingAlertBlock.Visibility = Visibility.Visible;
+			}
 		}
 
 		private void SteeringWheelRightButton_Click(object sender, RoutedEventArgs e)
 		{
-			cyclist.SWAngleRight();
-			UpdateFields();
+			if (cyclist.GetBikeSpeed() == 0)
+			{
+				cyclist.SWAngleRight();
+				UpdateFields();
+			}
+			else
+			{
+				SettingAlertBlock.Visibility = Visibility.Visible;
+			}
+
 		}
 
 		private void TirePressureDownButton_Click(object sender, RoutedEventArgs e)
 		{
-			cyclist.TirePressureDown();
-			UpdateFields();
+			if (cyclist.GetBikeSpeed() == 0)
+			{
+				cyclist.TirePressureDown();
+				UpdateFields();
+			}
+			else
+			{
+				SettingAlertBlock.Visibility = Visibility.Visible;
+			}
+
 		}
 
 		private void TirePressureUpButton_Click(object sender, RoutedEventArgs e)
 		{
-			cyclist.TirePressureUp();
-			UpdateFields();
+			if (cyclist.GetBikeSpeed() == 0)
+			{
+				cyclist.TirePressureUp();
+				UpdateFields();
+			}
+			else
+			{
+				SettingAlertBlock.Visibility = Visibility.Visible;
+			}
+
 		}
 
 		private void TurnLeverButtonUp_Click(object sender, RoutedEventArgs e)
@@ -319,18 +366,30 @@ namespace bicycle
 
 			WelcomeNameBlock.Text = cyclist.GetName();
 
+			if (cyclist.GetTirePressure() < 20)
+			{
+				SWAlertBlock.Text = "Please check your tire pressure";
+				SWAlertBlock.Visibility = Visibility.Visible;
+			}
+			else
+			{
+				SWAlertBlock.Visibility = Visibility.Collapsed;
+			}
+
+			if (cyclist.GetSWAngle() <-10 || cyclist.GetSWAngle() > 10)
+			{
+				SWAlertBlock.Text = "Please check your steering wheel angle";
+				SWAlertBlock.Visibility = Visibility.Visible;
+				
+			}
+			else
+			{
+				SWAlertBlock.Visibility = Visibility.Collapsed;
+			}
+
+			cyclist.SWAndleMaxSpeed();
+			SettingAlertBlock.Visibility = Visibility.Hidden;
 		}
-
-		//private void DockPanel_MouseEnter(object sender, MouseEventArgs e)
-		//{
-		//	BikeCyclistStateButtonsDock.Visibility = Visibility.Visible;
-		//}
-
-		//private void DockPanel_MouseLeave(object sender, MouseEventArgs e)
-		//{
-		//	BikeCyclistStateButtonsDock.Visibility = Visibility.Collapsed;
-	
-		//}
 
 		private void BikeCyclistStateSpoilerButton_Click(object sender, RoutedEventArgs e)
 		{

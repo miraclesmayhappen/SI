@@ -49,6 +49,18 @@ namespace bicycle
 			return bike.controlSystem.GetSWAngle();
 		}
 
+		public void SWAndleMaxSpeed()
+		{
+			if (bike.controlSystem.GetSWAngle() < -10 || bike.controlSystem.GetSWAngle() > 10)
+			{
+				bike.movementSystem.SetMaxSpeedShift(100);
+			}
+			else
+			{
+				bike.movementSystem.SetMaxSpeedShift(bike.speedAdjustment.GetShiftersMode());
+			}
+		}
+
 		public void SWAngleRight()
 		{
 			bike.controlSystem.SetSWAngle(bike.customizationSystem.FixAngleRight(bike.controlSystem.GetSWAngle()));
