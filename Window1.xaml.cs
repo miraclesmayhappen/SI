@@ -321,6 +321,84 @@ namespace bicycle
 
 		}
 
+		//private void DockPanel_MouseEnter(object sender, MouseEventArgs e)
+		//{
+		//	BikeCyclistStateButtonsDock.Visibility = Visibility.Visible;
+		//}
 
+		//private void DockPanel_MouseLeave(object sender, MouseEventArgs e)
+		//{
+		//	BikeCyclistStateButtonsDock.Visibility = Visibility.Collapsed;
+	
+		//}
+
+		private void BikeCyclistStateSpoilerButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (BikeCyclistStateButtons.Visibility == Visibility.Visible)
+			{
+				BikeCyclistStateButtons.Visibility = Visibility.Collapsed;
+			} else
+			if (BikeCyclistStateButtons.Visibility == Visibility.Collapsed)
+			{
+				BikeCyclistStateButtons.Visibility = Visibility.Visible;
+			}
+		}
+
+		private void DirectionSpoilerButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (DirectionButtons.Visibility == Visibility.Visible)
+			{
+				DirectionButtons.Visibility = Visibility.Collapsed;
+			}
+			else
+			if (DirectionButtons.Visibility == Visibility.Collapsed)
+			{
+				DirectionButtons.Visibility = Visibility.Visible;
+			}
+		}
+
+		private void VelocitySpoilerButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (VelocityButtons.Visibility == Visibility.Visible)
+			{
+				VelocityButtons.Visibility = Visibility.Collapsed;
+			}
+			else
+			if (VelocityButtons.Visibility == Visibility.Collapsed)
+			{
+				VelocityButtons.Visibility = Visibility.Visible;
+			}
+		}
+
+		private void SpeedSettingButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (SpeedSettingButtons.Visibility == Visibility.Visible)
+			{
+				SpeedSettingButtons.Visibility = Visibility.Collapsed;
+			}
+			else
+			if (SpeedSettingButtons.Visibility == Visibility.Collapsed)
+			{
+				SpeedSettingButtons.Visibility = Visibility.Visible;
+			}
+		}
+
+		private void LeanRightButton_Click(object sender, RoutedEventArgs e)
+		{
+			cyclist.Lean("r");
+			UpdateFields();
+		}
+
+		private void AlignStaighButton_Click(object sender, RoutedEventArgs e)
+		{
+			cyclist.Lean("s");
+			UpdateFields();
+		}
+
+		private void LeanLeftButton_Click(object sender, RoutedEventArgs e)
+		{
+			cyclist.Lean("l");
+			UpdateFields();
+		}
 	}
 }

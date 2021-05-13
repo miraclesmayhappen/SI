@@ -99,7 +99,7 @@ namespace bicycle
 		
 	}
 
-	class ControlSystem : MovementSystem
+	class ControlSystem 
 	{
 		protected SteeringWheel steeringWheel;
 		private SteeringColumn steeringColumn;
@@ -135,7 +135,7 @@ namespace bicycle
 
 	}
 
-	class CustomizationSystem : ControlSystem
+	class CustomizationSystem 
 	{
 		private bool state { get; set; }
 		private Saddle saddle;
@@ -210,7 +210,7 @@ namespace bicycle
 			{ frontTireTube.pressure--; }
 		}
 	}
-	class SpeedAdjustment : MovementSystem
+	class SpeedAdjustment 
 		{
 			private Shifters shifters;
 			protected Ropes ropes;
@@ -241,7 +241,7 @@ namespace bicycle
 
 
 	}
-	class BrakingSystem : SpeedAdjustment
+	class BrakingSystem 
 		{
 			private BrakeLevers brakeLevers;
 			private Brakes frontBrakes;
@@ -277,24 +277,25 @@ namespace bicycle
 
 			public double HardBrake(double speed)
 			{
-				if (speed > 0)
-				{
-					if (speed < 2)
-					{
-						speed = 0;
-					}
-					else
-					{
-						Random r = new Random();
-						int range = 20;
-						double rDouble = r.NextDouble() * range; //for doubles
-						while (speed - rDouble < 0)
-						{
-							rDouble = r.NextDouble() * range; //for doubles
-						}
-						speed -= rDouble;
-						speed = Math.Round(speed, 2);
-					}
+			if (speed > 0)
+			{
+				//	if (speed < 2)
+				//	{
+				//		speed = 0;
+				//	}
+				//	else
+				//	{
+				//		Random r = new Random();
+				//		int range = 20;
+				//		double rDouble = r.NextDouble() * range; //for doubles
+				//		while (speed - rDouble < 0)
+				//		{
+				//			rDouble = r.NextDouble() * range; //for doubles
+				//		}
+				//		speed -= rDouble;
+				//		speed = Math.Round(speed, 2);
+				//	}
+				speed = 0;
 				}
 				return speed;
 			}

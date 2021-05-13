@@ -6,11 +6,37 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:bicycle"
         mc:Ignorable="d"
-        Title="BicycleApp" Height="604" Width="600" Background="LightSteelBlue" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="bicycle-1024x602.png" Topmost="True">
+        Title="BicycleApp" Height="810" Width="600" Background="LightSteelBlue"  WindowStartupLocation="CenterScreen" Icon="bicycle-1024x602.png" ResizeMode="NoResize">
     <Window.Effect>
         <DropShadowEffect Opacity="0.8" BlurRadius="20"/>
     </Window.Effect>
-    <StackPanel Background="White">
+
+    <Window.Resources>
+        <Style x:Key="Triggers" TargetType="{x:Type StackPanel}">
+            <Setter Property="Opacity" Value="0"/>
+            <Style.Triggers >
+
+                <Trigger Property="IsVisible" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <StackPanel Background="White" Margin="0,0,0,-120">
         <Grid Height="30">
             <StackPanel HorizontalAlignment="Left" Margin="20 0">
                 <ComboBox FontSize="13" Width="40" Foreground="#FFA2A2A2" SelectedIndex="0" VerticalAlignment="Center">
@@ -30,7 +56,7 @@
             </StackPanel>
             <Grid x:Name="GridCursor" Width="150" Height="5" Background="SteelBlue" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10 0"/>
         </Grid>
-        <Grid x:Name="GridMain" Height="500" Background="LightSteelBlue">
+        <Grid x:Name="GridMain" Height="700" Background="LightSteelBlue">
             <Grid.Effect>
                 <DropShadowEffect/>
             </Grid.Effect>
@@ -49,7 +75,7 @@
 
                     <Grid Width="250" HorizontalAlignment="Center">
                         <TextBlock Text="Bicycle:" HorizontalAlignment="Left"/>
-                        <TextBlock Name="BicycleUpDown" Text="" HorizontalAlignment="Right" />
+                        <TextBlock Name="BicycleUpDown" Text="Down" HorizontalAlignment="Right" />
                     </Grid>
 
                     <Grid Width="250" HorizontalAlignment="Center">
@@ -73,8 +99,20 @@
                         <TextBlock Name="DirectionBlock" Text="Straight" HorizontalAlignment="Right" />
                     </Grid>
                     <TextBlock Name="AlertBlock" Text="" Visibility="Hidden" HorizontalAlignment="Center" Foreground="#FFF0C0AC"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Vertical" Margin="10 5" HorizontalAlignment="Left">
+                    
+                    
+                    <!--BUTTONS-->
+
+
+                    <StackPanel Name="Buttons">
+
+
+                        <Button x:Name="BikeCyclistStateSpoilerButton" Margin="5" Click="BikeCyclistStateSpoilerButton_Click" Content="Bike Cyclist State controls"  Background="LightSteelBlue"  Foreground="White" BorderBrush="{x:Null}" />
+
+                        <StackPanel Style="{StaticResource Triggers}" Orientation="Horizontal" HorizontalAlignment="Center" Name="BikeCyclistStateButtons" Visibility="Collapsed">
+
+
+                            <StackPanel Orientation="Vertical" Margin="10 5" HorizontalAlignment="Left">
                             <Button  Name="TakeBikeButton" Click="TakeBikeButton_Click" Content="Take bike" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
                             <Button  Name="PutBikeButton" Click="PutBikeButton_Click" Content="Put bike" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
                         </StackPanel>
@@ -83,29 +121,53 @@
                             <Button  x:Name="StadOffButton" Click="StadOffButton_Click" Content="Stand off bike" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="10 5" HorizontalAlignment="Center">
-                        <Button  Name="TurnRightButton" Click="TurnRightButton_Click" Content="Turn right" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
-                        <Button Name ="GoStaighButton" Click="GoStaightButton_Click"  Content="Go straight" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
-                        <Button Name="TurnLeftButton" Click="TurnLeftButton_Click" Content="Turn left" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+
+                        <Button x:Name="DirectionSpoilerButton" Margin="5" Click="DirectionSpoilerButton_Click" Content="Direction controls"  Background="LightSteelBlue"  Foreground="White" BorderBrush="{x:Null}" />
+
+                        <StackPanel Style="{StaticResource Triggers}" Orientation="Horizontal" Margin="10 5" HorizontalAlignment="Center" Name="DirectionButtons" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical">
+                            <Button  Name="TurnRightButton" Click="TurnRightButton_Click" Content="Turn right" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                            <Button  Name="LeanRightButton" Click="LeanRightButton_Click" Content="Lean right" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                    <Button Name ="GoStaighButton" Click="GoStaightButton_Click"  Content="Go straight" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                     <Button Name ="AlignStaighButton" Click="AlignStaighButton_Click"  Content="Align straight" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Button Name="TurnLeftButton" Click="TurnLeftButton_Click" Content="Turn left" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+                            <Button Name="LeanLeftButton" Click="LeanLeftButton_Click" Content="Lean left" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
+
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                        <Button x:Name="VelocitySpoilerButton" Margin="5" Click="VelocitySpoilerButton_Click"  Content="Velocity controls"  Background="LightSteelBlue"  Foreground="White" BorderBrush="{x:Null}" />
+
+                        <StackPanel Style="{StaticResource Triggers}" Orientation="Horizontal" HorizontalAlignment="Center" Name="VelocityButtons" Visibility="Collapsed">
                         <StackPanel Orientation="Vertical" Margin="10 5" HorizontalAlignment="Left">
                             <Button Name="PedalButton" Click="PedalButton_Click" Content="Pedal" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
                             <Button Name="PushBikeButton" Click="PushBikeButton_Click" Content="Push bike" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
-                            <!--<Button Name="TurnLeverButton" Click="PedalButton_Click" Content="Turn lever" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>-->
-                        </StackPanel>
+                          </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="10 5" HorizontalAlignment="Center">
                             <Button Name="GentleBrakeButton" Click="GentleBrakeButton_Click" Content="Press brake gently" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
                             <Button Name="HardBrakeButton" Click="HardBrakeButton_Click" Content="Press brake hard" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Right" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                        <Button x:Name="SpeedSettingButton" Margin="5" Click="SpeedSettingButton_Click"  Content="Shifter mode"  Background="LightSteelBlue"  Foreground="White" BorderBrush="{x:Null}" />
+
+                        <StackPanel Style="{StaticResource Triggers}" Orientation="Horizontal" HorizontalAlignment="Center" Name="SpeedSettingButtons" Visibility="Collapsed">
                         <Button Name="TurnLeverButtonUp" Click="TurnLeverButtonUp_Click" Content="Turn shifter Up" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Center" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
                         <Button Name="TurnLeverButtonDown" Click="TurnLeverButtonDown_Click" Content="Turn shifter Down" Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Center"  HorizontalAlignment="Center" FontSize="12" Padding="0" Height="Auto" Margin="10 0" Foreground="SteelBlue"/>
                     </StackPanel>
+                    </StackPanel>
                 </StackPanel>
-            </Border>
+                    
+            </Border> 
 
+            
+            <!--SETTINGS-->
+            
             <Border MinWidth="400" MaxWidth="550" Margin="20" Padding="15" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White" CornerRadius="20" x:Name="SettingBorder" Visibility="Hidden">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="50" ShadowDepth="0" Color="DarkGray" ></DropShadowEffect>
@@ -173,10 +235,9 @@
                         </Grid>
                     </StackPanel>
 
-
                 </StackPanel>
             </Border>
-            <Image HorizontalAlignment="Center" Height="88" VerticalAlignment="Bottom" Width="146" Source="185-1852385_delivery-bicycle-vector-png-transparent-png.png"/>
+            <Image HorizontalAlignment="Center" Height="88" VerticalAlignment="Bottom" Width="146" Source="185-1852385_delivery-bicycle-vector-png-transparent-png.png" />
 
 
         </Grid>

@@ -148,6 +148,23 @@ namespace bicycle
 					break;
 				}
 		}
+
+		public void Lean(string d)
+		{
+			switch (d)
+			{
+				case "r":
+					bike.controlSystem.TurnRight();
+					break;
+				case "l":
+					bike.controlSystem.TurnLeft();
+					break;
+				case "s":
+					bike.controlSystem.GoStraight();
+					break;
+			}
+		}
+
 		public void GentleSlow() 
 		{
 			bike.movementSystem.SetSpeed(bike.brakingSystem.SoftBrake(bike.movementSystem.GetSpeed()));
